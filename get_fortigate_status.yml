@@ -1,0 +1,17 @@
+- name: Retrieve FortiGate System Status
+  hosts: fortigate
+  connection: httpapi
+  gather_facts: no
+  collections:
+    - fortinet.fortios
+
+  tasks:
+    - name: Get system status
+      fortios_monitor:
+        vdom: "root"
+        selector: "system/status"
+      register: result
+
+    - name: Display output
+      debug:
+        msg: "{{ result.meta }}"
